@@ -53,9 +53,9 @@ if (!isEmpty && categoryName == null) {
 	//카테고리이름에 해당하는 것만 가져오게하면됨 
 	for (CategoryDto tmp : categoryList) {
 		if (tmp.getCategory().equals(categoryName)) {
-			row.add(tmp.getCategory());
-			sto.add(tmp.getStoNum());
-			break;
+	row.add(tmp.getCategory());
+	sto.add(tmp.getStoNum());
+	break;
 		}
 	}
 	randomCategory = row.get(0);
@@ -121,7 +121,8 @@ td {
 			<!-- 첫화면 접속시 작동할 코드 -->
 			<c:choose>
 				<c:when test="${empty menuList}">
-					<img src="${pageContext.request.contextPath}/images/empty.jpg" alt="" />
+					<img src="${pageContext.request.contextPath}/images/empty.jpg"
+						alt="" />
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="tmp" items="${menuList}">
@@ -147,9 +148,13 @@ td {
 							<h2 id="name">${tmp.name}</h2>
 							<h3>${tmp.description}</h3>
 							<h3>${tmp.price}원</h3>
+<<<<<<< HEAD
 							
 							<button onclick="basketBtn('${tmp.name}','${tmp.price}')">장바구니 추가</button>
 
+=======
+							<a href="add.jsp?name=${tmp.name}&price=${tmp.price}" class="button">장바구니 추가</a>
+>>>>>>> upstream/main
 						</article>
 					</c:forEach>
 				</c:otherwise>
@@ -202,7 +207,7 @@ td {
 					</section>
 				</div>
 				<!-- categories -->
-				
+
 			</div>
 		</footer>
 
@@ -214,7 +219,6 @@ td {
 				
 						<h2>장바구니 목록</h2>
 						<table>
-						
 							<thead>
 								<td>메뉴 이름</td>
 								<td>수량</td>
@@ -222,10 +226,31 @@ td {
 								<td>주문 금액</td>
 								<td>삭제</td>
 							</thead>
-							<tbody>
-						
-						
-						
+							<tbody id="table">
+								<c:if test="${sessionScope.shopList ne null}">
+									<c:forEach var="item" items="${sessionScope.shopList}">
+									<tr>
+										<td>${item.menu}</td>
+										<td>
+											<button id="minus">-</button>${item.count}
+											<button id="plus">+</button>
+										</td>
+										<td>${item.price }</td>
+										<td>${item.price * item.count }</td>
+										<td><button>X</button></td>
+									</tr>
+								</c:forEach>
+								</c:if>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td>총합계</td>
+									<td colspan='3'>20000원</td>
+									<td><button>주문하기</button></td>
+								</tr>
+							</tfoot>
+						</table>
+
 					</section>
 				</div>
 				<div>
@@ -274,14 +299,9 @@ td {
 		src="${pageContext.request.contextPath}/order_assets/js/util.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/order_assets/js/main.js"></script>
-	
+
 	<script>
-	function basketBtn(name) {
-		
-		fetch("${pageContext.request.contextPath}/customer/basket?name="+name)
-		
-	}
-	
+
 	document.querySelectorAll(".shopping").forEach((form)=>{
 		
 		let name = form.querySelector(".name").innerText;
@@ -296,8 +316,16 @@ td {
 			// 그리고 현재 페이지 reload
 		})
 	});
-
-		
+	
+	
+	window.addEventListener('DOMContentLoaded', function() {
+	    // 페이지 로딩 시 장바구니 열기
+	    var isAdded = '<%= request.getParameter("isAdded") %>';
+	    console.log(isAdded);
+	    if(isAdded != "null"){
+	    	document.querySelector("#footer2").classList.add("active");
+	    }
+	  });
 	
 	</script>
 </body>

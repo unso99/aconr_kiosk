@@ -215,7 +215,7 @@
 					//사용할수 있는 메뉴이름 이라는 의미에서 true 를 넣어준다.
 					isNameValid=true;
 					e.target.setCustomValidity("");
-					small.innerText = "사용 가능한 메뉴 입니다.";
+					
 					
 				}else{
 					//사용할수 없는 메뉴이름이라는 의미에서 false 를 넣어준다.

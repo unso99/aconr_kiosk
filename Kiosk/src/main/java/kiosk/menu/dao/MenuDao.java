@@ -241,7 +241,7 @@ public class MenuDao {
 		}
 	}
 	
-
+	//상품정보 하나 가져오기
 	public MenuDto getdata(UpdateMenuDto udto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -291,6 +291,49 @@ public class MenuDao {
 			}
 		}
 		return dto;
+	}
+	//상품 이름 가져오기
+	public String getName(String name) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String inValidname=null;
+		
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql 문
+			String sql = "SELECT name"
+					+ " FROM menu_info"
+					+ " WHERE name=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 에 바인딩할 내용이 있으면 여기서 한다.
+			
+
+			pstmt.setString(1, name);
+			
+			
+
+
+			//query 문 수행하고 결과(ResultSet) 얻어내기
+			rs = pstmt.executeQuery();
+			//상품정보가 담긴 Dto를 하나 만들어봅시다 
+			if (rs.next()) {
+				inValidname= name;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close(); //Connection 객체의 close() 메소드를 호출하면 Pool 에 반납된다.
+			} catch (Exception e) {
+			}
+		}
+		return inValidname;
 	}
 	//상품목록 전체 가져오기 ? 아직 사용할지는 미정
 	public List<MenuDto> getList(){
