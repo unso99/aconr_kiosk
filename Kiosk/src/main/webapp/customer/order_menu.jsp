@@ -1,3 +1,4 @@
+<%@page import="kiosk.order.dto.OrderDto"%>
 <%@page import="kiosk.menu.dto.MenuDto"%>
 <%@page import="kiosk.menu.dto.CategoryDto"%>
 <%@page import="kiosk.menu.dao.MenuDao"%>
@@ -142,9 +143,11 @@ td {
 										alt="" /></a>
 								</c:otherwise>
 							</c:choose>
+
 							<h2 id="name">${tmp.name}</h2>
 							<h3>${tmp.description}</h3>
 							<h3>${tmp.price}원</h3>
+							
 							<button onclick="basketBtn('${tmp.name}','${tmp.price}')">장바구니 추가</button>
 
 						</article>
@@ -207,6 +210,8 @@ td {
 			<div class="inner split">
 				<div>
 					<section>
+				
+				
 						<h2>장바구니 목록</h2>
 						<table>
 						
@@ -217,32 +222,10 @@ td {
 								<td>주문 금액</td>
 								<td>삭제</td>
 							</thead>
-							
 							<tbody>
-							
-								<tr>
-									<td>아메리카노</td>
-									<td>
-									<button id="minus">-</button>
-									2개
-									<button id="plus">+</button>
-									</td>
-									<td>2000원</td>
-									<td>4000원</td>
-									<td><button>X</button></td>
-								</tr>
-							</tbody>
-							
-							<tfoot>
-								<tr>
-									<td>총합계</td>
-									<td colspan='3'>20000원</td>
-									<td><button>주문하기</button></td>
-								</tr>
-							</tfoot>
-							
-						</table>
-
+						
+						
+						
 					</section>
 				</div>
 				<div>
@@ -293,13 +276,10 @@ td {
 		src="${pageContext.request.contextPath}/order_assets/js/main.js"></script>
 	
 	<script>
-	function basketBtn(name, price) {
+	function basketBtn(name) {
 		
-		fetch("${pageContext.request.contextPath}/customer/data.jsp?name="+name+"&price="+price)
-		.then(res=>res.json())
-		.then(data=>{
-			console.log(data.shoplist);
-		})
+		fetch("${pageContext.request.contextPath}/customer/basket?name="+name)
+		
 	}
 	
 	document.querySelectorAll(".shopping").forEach((form)=>{

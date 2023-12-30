@@ -38,7 +38,6 @@ public class Delete extends HttpServlet{
 		
 		}
 		
-	    
 		req.setAttribute("shoplist", shoplist);
 	     RequestDispatcher rd=req.getRequestDispatcher("/customer/basket.jsp");
 	     rd.forward(req, resp);

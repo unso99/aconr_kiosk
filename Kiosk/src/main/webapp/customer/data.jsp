@@ -1,3 +1,5 @@
+<%@page import="org.json.JSONArray"%>
+<%@page import="org.json.JSONObject"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.tomcat.util.json.JSONParser"%>
 <%@page import="org.apache.catalina.valves.JsonAccessLogValve"%>
@@ -16,28 +18,43 @@
         shoplist = new ArrayList<OrderDto>();
         session.setAttribute("shoplist", shoplist);
 	}else{
-		// 세션에 동일한 이름이 있으면 
-        for (OrderDto order : shoplist) {
-            if (order.getMenu().equals(name)) {
-                // 이미 존재하는경우 카운트만 1 증가시킨다.
-                order.setCount(order.getCount() + 1);
-               
-            }
-            session.setAttribute("shoplist", shoplist);
-        }   
-		
-		OrderDto dto = new OrderDto();
-        dto.setMenu(name);
-        dto.setCount(count);
-        dto.setPrice(price);
-  
-        shoplist.add(dto);
-        session.setAttribute("shoplist", shoplist);
+		 for (OrderDto order : shoplist) {
+             if (order.getMenu().equals(name)) {
+                 // 이미 존재하는경우 카운트만 1 증가시킨다.
+                 order.setCount(order.getCount() + 1);
+                 session.setAttribute("shoplist", shoplist);
+                 return;
+             }
+         }
+		 OrderDto dto = new OrderDto();
+	        dto.setMenu(name);
+	        dto.setCount(count);
+	        dto.setPrice(price);
+	  
+	        shoplist.add(dto);
+	        session.setAttribute("shoplist", shoplist);
 	}
 	
 	
     System.out.println("name:" + name + "price:" + price);
     // name이 null이거나 값이 없는 경우에 대한 예외 처리
+    
+    //[]
+    JSONArray arr=new JSONArray();
+    arr.putAll(shoplist);
+    //{}
+    JSONObject obj=new JSONObject();
+    obj.put("shoplist", arr);
 %>
-{"shoplist":"<%= shoplist %>"} 
+<%=obj.toString() %>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
  
