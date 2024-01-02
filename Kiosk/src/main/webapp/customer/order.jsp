@@ -1,9 +1,17 @@
+<%@page import="kiosk.order.dto.OrderDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 boolean isSuccess = true;
-
+List<OrderDto> shopList = (List<OrderDto>)session.getAttribute("shopList");
+if(shopList.isEmpty()) isSuccess = false;
+int totalPrice = 0;
+for(OrderDto item : shopList){
+	totalPrice += item.getCount() * item.getPrice();
+}
+pageContext.setAttribute("totalPrice", totalPrice);
 pageContext.setAttribute("isSuccess", isSuccess);
 %>
 <!DOCTYPE html>
@@ -64,42 +72,26 @@ pageContext.setAttribute("isSuccess", isSuccess);
 										<table>
 											<thead>
 												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
+													<th>주문 메뉴</th>
+													<th>갯수</th>
+													<th>가격</th>
+													<th>총가격</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
+												<c:forEach var="tmp" items="${sessionScope.shopList}">
+														<tr>
+															<td>${tmp.menu}</td>
+															<td>${tmp.count }</td>
+															<td>${tmp.price}원</td>
+															<td>${tmp.count * tmp.price}원</td>
+														</tr>
+												</c:forEach>
 											</tbody>
 											<tfoot>
 												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
+													<td colspan="3"></td>
+													<td>${totalPrice}원</td>
 												</tr>
 											</tfoot>
 										</table>

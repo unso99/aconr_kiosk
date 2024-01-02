@@ -46,6 +46,8 @@
 					환영합니다!</p>
 					<br />
 					<a href="${pageContext.request.contextPath}/menu/menu">메뉴 관리 하러 가기</a>
+					<br /><br />
+					<a href="${pageContext.request.contextPath}/index.jsp">메인 화면으로 가기</a>
 				</c:when>
 				<c:otherwise>
 					<p>
