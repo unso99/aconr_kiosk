@@ -148,13 +148,8 @@ td {
 							<h2 id="name">${tmp.name}</h2>
 							<h3>${tmp.description}</h3>
 							<h3>${tmp.price}원</h3>
-<<<<<<< HEAD
-							
-							<button onclick="basketBtn('${tmp.name}','${tmp.price}')">장바구니 추가</button>
 
-=======
-							<a href="add.jsp?name=${tmp.name}&price=${tmp.price}" class="button">장바구니 추가</a>
->>>>>>> upstream/main
+							<a href="add.jsp?name=${tmp.name}&price=${tmp.price}" class="button">추가</a>
 						</article>
 					</c:forEach>
 				</c:otherwise>
@@ -211,48 +206,7 @@ td {
 			</div>
 		</footer>
 
-		<footer id="footer2" class="panel">
-			<div class="inner split">
-				<div>
-					<section>
-				
-				
-						<h2>장바구니 목록</h2>
-						<table>
-							<thead>
-								<td>메뉴 이름</td>
-								<td>수량</td>
-								<td>상품 금액</td>
-								<td>주문 금액</td>
-								<td>삭제</td>
-							</thead>
-							<tbody id="table">
-								<c:if test="${sessionScope.shopList ne null}">
-									<c:forEach var="item" items="${sessionScope.shopList}">
-									<tr>
-										<td>${item.menu}</td>
-										<td>
-											<button id="minus">-</button>${item.count}
-											<button id="plus">+</button>
-										</td>
-										<td>${item.price }</td>
-										<td>${item.price * item.count }</td>
-										<td><button>X</button></td>
-									</tr>
-								</c:forEach>
-								</c:if>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td>총합계</td>
-									<td colspan='3'>20000원</td>
-									<td><button>주문하기</button></td>
-								</tr>
-							</tfoot>
-						</table>
-
-					</section>
-				</div>
+		
 				<div>
 					<section>
 						<h2>향기로운 휴식, 당신을 위한 카페 Acorn Cafe</h2>
@@ -320,7 +274,7 @@ td {
 	
 	window.addEventListener('DOMContentLoaded', function() {
 	    // 페이지 로딩 시 장바구니 열기
-	    var isAdded = '<%= request.getParameter("isAdded") %>';
+	    var isAdded = '<%=request.getParameter("isAdded") %>';
 	    console.log(isAdded);
 	    if(isAdded != "null"){
 	    	document.querySelector("#footer2").classList.add("active");

@@ -62,9 +62,6 @@ List<OrderDto> list =(List<OrderDto>)request.getAttribute("orderlist");
 				<th>합계</th>
 				
 				<td><%=total%></td>
-				<td>
-				<a href="${pageContext.request.contextPath}/customer/pay">결제</a>
-				</td>
 			</tr>
 		</tfoot>
 
