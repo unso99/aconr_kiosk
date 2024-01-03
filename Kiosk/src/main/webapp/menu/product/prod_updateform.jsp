@@ -74,8 +74,8 @@
 			<!-- Logo -->
 				<div id="logo">
 					<span class="image avatar48"><img src="${pageContext.request.contextPath}/images/avatar.jpg" alt="" /></span>
-					<h1 id="title">김동주</h1>
-					<p>억만장자</p>
+					<h1 id="title">${sessionScope.oName}</h1>
+					<p>${sessionScope.email}</p>
 				</div>
 
 			<!-- Nav -->
