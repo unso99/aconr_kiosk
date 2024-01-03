@@ -11,6 +11,7 @@
 		//아이디 비밀번호를 쿠키로 응답하고 1주일 동안 유지되도록 한다.
 		Cookie cook1 = new Cookie("savedEmail", email);
 		Cookie cook2 = new Cookie("savedPwd", pwd);
+		
 		cook1.setMaxAge(60*60*24*7);
 		cook2.setMaxAge(60*60*24*7);
 		response.addCookie(cook1);

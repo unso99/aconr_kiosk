@@ -26,7 +26,9 @@ if (cooks != null) {
 	System.out.println(hasCook);
 		}
 	}
+
 }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -95,6 +97,7 @@ if (cooks != null) {
 	            window.location.href = "../index.jsp";
 	        }, 1000);
 		});
+		
 		
 		let emailNN = false;
 		let pwdNN = false;
