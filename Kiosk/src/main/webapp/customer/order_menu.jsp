@@ -87,9 +87,22 @@ pageContext.setAttribute("randomCategory", randomCategory);
 		href="${pageContext.request.contextPath}/order_assets/css/noscript.css" />
 </noscript>
 <style>
-td {
-	text-align: center;
-}
+	td {
+		text-align: center;
+	}
+	.thumb{
+	  position: relative;
+      display: inline-block;
+	}
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width:100%;
+      height:100%;
+    }
 </style>
 </head>
 <body class="is-preload">
@@ -129,26 +142,33 @@ td {
 						alt="" />
 				</c:when>
 				<c:otherwise>
+				
 					<c:forEach var="tmp" items="${menuList}">
 						<article class="thumb"
 							style="width: 25%; box-sizing: border-box; padding: 10px; display: inline-block;">
 							<c:choose>
 								<c:when test="${tmp.imageUrl eq null}">
-									<a
-										href="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
-										class="image"><img
-										src="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
-										alt="" /></a>
+								<a
+									href="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
+									class="image"><img
+									src="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
+									alt="" /></a>
 								</c:when>
 								<c:otherwise>
 									<a
 										href="${pageContext.request.contextPath}/upload/${tmp.imageUrl}"
-										class="image"><img
+										class="image"  id="imageLink"><img
 										src="${pageContext.request.contextPath}/upload/${tmp.imageUrl}"
 										alt="" /></a>
 								</c:otherwise>
 							</c:choose>
 
+							
+							
+							<c:if test="${tmp.sell eq 'YES'}">
+								<img src="${pageContext.request.contextPath}/images/sell2.png" alt="덮어쓸 이미지" class="overlay" id="overlayImage" >	
+							</c:if>
+							
 							<h2 id="name">${tmp.name}</h2>
 							<h3>${tmp.description}</h3>
 							<h3>${tmp.price}원</h3>
@@ -198,15 +218,14 @@ td {
 						<h2>CHOOSE CATEGORY</h2>
 						<ul class="action">
 							<c:forEach var="tmp" items="${requestScope.category}">
-								<li><a
+								<li><h3><a
 									href="${pageContext.request.contextPath}/customer/order_menu.jsp?categoryName=${tmp.category}"
-									class="category-list">${tmp.category}</a></li>
+									class="category-list">${tmp.category}</a></h3></li>
 							</c:forEach>
 						</ul>
 					</section>
 				</div>
 				<!-- categories -->
-
 			</div>
 		</footer>
 
@@ -318,8 +337,8 @@ td {
 
 	<!-- Scripts 장바구니 (session 정보)관리 -->
 	<script>
- 	function insertBtn(name, price) {
 
+ 	function insertBtn(name, price) {
 		fetch("${pageContext.request.contextPath}/customer/data_insert.jsp?name="+name+"&price="+price)
 		.then(res=>res.json()) // 페이지 전환없이 응답하는 일반적인 방법 : JSON 문자열
 		.then(data=>{ // json String 을 javascript object로 바꾸고 data 매개변수로 들어옴

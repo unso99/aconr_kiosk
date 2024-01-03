@@ -17,9 +17,9 @@
 	
 	
 	// 1.변수선언
-	String url = "jdbc:oracle:thin:@localhost:1521/XE";
-	String uid = "scott";
-	String upw = "tiger";
+	String url = "jdbc:oracle:thin:@14.63.164.99:1521/XE";
+	String uid = "kiosk";
+	String upw = "TIGER1541";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
