@@ -215,6 +215,8 @@ td {
 				<div>
 					<section>
 						<h2>장바구니 목록</h2>
+						<c:choose>
+						<c:when test="${sessionScope.shopList ne null}">
 						<table>
 							<thead>
 								<td>메뉴 이름</td>
@@ -228,7 +230,7 @@ td {
 							<tbody>
 							
 							<tbody id="shopList-table">
-								<c:if test="${sessionScope.shopList ne null}">
+								
 									<c:forEach var="tmp" items="${sessionScope.shopList}">
 									<tr class="shopList-table-row">
 										<td class="name">${tmp.menu}</td>
@@ -246,9 +248,7 @@ td {
 										</td>
 									</tr>
 								</c:forEach>
-								</c:if>
 							</tbody>							
-							
 							<tfoot>
 								<tr>
 									<td>총합계</td>
@@ -260,8 +260,13 @@ td {
 									</td>
 								</tr>
 							</tfoot>
+							
 						</table>
-
+						</c:when>
+						<c:otherwise>
+							<p>장바구니가 비어있습니다.</p>
+						</c:otherwise>
+						</c:choose>
 					</section>
 				</div>
 				<div>

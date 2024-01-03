@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="kiosk.order.dto.OrderDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -6,6 +7,7 @@
 <%
 boolean isSuccess = true;
 List<OrderDto> shopList = (List<OrderDto>)session.getAttribute("shopList");
+
 if(shopList.isEmpty()) isSuccess = false;
 int totalPrice = 0;
 for(OrderDto item : shopList){
@@ -13,6 +15,7 @@ for(OrderDto item : shopList){
 }
 pageContext.setAttribute("totalPrice", totalPrice);
 pageContext.setAttribute("isSuccess", isSuccess);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -92,6 +95,10 @@ pageContext.setAttribute("isSuccess", isSuccess);
 												<tr>
 													<td colspan="3"></td>
 													<td>${totalPrice}¿ø</td>
+												</tr>
+													<tr>
+													<td colspan="3"></td>
+													<td><a href="${pageContext.request.contextPath}/customer/pay.jsp">°áÁ¦</a></td>
 												</tr>
 											</tfoot>
 										</table>
