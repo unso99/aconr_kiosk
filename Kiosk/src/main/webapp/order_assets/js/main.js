@@ -213,7 +213,7 @@
 			$main.children('.thumb').each(function() {
 
 				var	$this = $(this),
-					$image = $this.find('.image'), $image_img = $image.children('img'),
+					$image = $this.find('.imageNoSold'), $image_img = $image.children('img'),
 					x;
 
 				// No image? Bail.

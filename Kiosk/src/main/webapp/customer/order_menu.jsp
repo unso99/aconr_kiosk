@@ -157,17 +157,31 @@ pageContext.setAttribute("randomCategory", randomCategory);
 						<article class="thumb"
 							style="width: 25%; box-sizing: border-box; padding: 10px; display: inline-block;">
 							<c:choose>
-								<c:when test="${tmp.imageUrl eq null}">
+								<c:when test="${tmp.imageUrl eq null and tmp.sell eq 'YES'}">
 								<a
 									href="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
 									class="image"><img
 									src="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
 									alt="" /></a>
 								</c:when>
+								<c:when test="${tmp.imageUrl eq null and tmp.sell eq 'NO'}">
+								<a
+									href="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
+									class="image imageNoSold"><img
+									src="${pageContext.request.contextPath}/images/fulls/prepare.jpg"
+									alt="" /></a>
+								</c:when>
+								<c:when test="${tmp.imageUrl ne null and tmp.sell eq 'YES'}">
+								<a
+										href="${pageContext.request.contextPath}/upload/${tmp.imageUrl}"
+										class="image"  id="imageLink"><img
+										src="${pageContext.request.contextPath}/upload/${tmp.imageUrl}"
+										alt="" /></a>
+								</c:when>
 								<c:otherwise>
 									<a
 										href="${pageContext.request.contextPath}/upload/${tmp.imageUrl}"
-										class="image"  id="imageLink"><img
+										class="image imageNoSold"  id="imageLink"><img
 										src="${pageContext.request.contextPath}/upload/${tmp.imageUrl}"
 										alt="" /></a>
 								</c:otherwise>

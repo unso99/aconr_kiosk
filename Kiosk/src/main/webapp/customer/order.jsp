@@ -25,7 +25,7 @@ for(OrderDto item : shopList){
 	OrderList.add(dto);
 
 }
-
+pageContext.setAttribute("orderList",OrderList);
 pageContext.setAttribute("totalPrice", totalPrice);
 pageContext.setAttribute("isSuccess", isSuccess);
 
@@ -95,7 +95,7 @@ pageContext.setAttribute("isSuccess", isSuccess);
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="tmp" items="${OrderList}">
+												<c:forEach var="tmp" items="${orderList}">
 														<tr>
 															<td>${tmp.menu}</td>
 															<td>${tmp.count }</td>
