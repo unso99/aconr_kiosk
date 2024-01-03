@@ -21,19 +21,19 @@ public class Neworder extends HttpServlet {
 		
 		int tableNum=1;
 		
-		if(req.getSession().getAttribute("shoplist")==null) {
+		if(req.getSession().getAttribute("shopList")==null) {
 			String url = req.getContextPath();
 			resp.sendRedirect(url+"/cutomer/order_menu.jsp");
 			return;
 		}
 		
-		List<OrderDto> shoplist = (List<OrderDto>) req.getSession().getAttribute("shoplist");
+		List<OrderDto> shopList = (List<OrderDto>) req.getSession().getAttribute("shopList");
 	
 		boolean success=false;
 
 
 		//session 에 shoplist 반복문 돌면서 orderdto 에 값 넣고 DB에 insert 하기
-		for(OrderDto tmp:shoplist){
+		for(OrderDto tmp:shopList){
 			List<String> list=OrderDao.getInstance().select(tableNum);
 			//
 			boolean pass=false;
@@ -61,9 +61,9 @@ public class Neworder extends HttpServlet {
 			}
 		}
 
-			req.getSession().removeAttribute("shoplist");
+			req.getSession().removeAttribute("shopList");
 			
-			RequestDispatcher rd=req.getRequestDispatcher("/customer/order_menu.jsp");
+			RequestDispatcher rd=req.getRequestDispatcher("/index.jsp");
 		    rd.forward(req, resp);
 	
 	}
