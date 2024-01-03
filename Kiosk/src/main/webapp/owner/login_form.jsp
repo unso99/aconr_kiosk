@@ -37,15 +37,23 @@ if (cooks != null) {
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/owner_assets/css/main.css" />
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 <body class="is-preload">
 
 	<!-- Header -->
 	<header id="header">
-		<h1>
-			<a href="${pageContext.request.contextPath}/index.jsp">Acorn
-				Kiosk</a>
-		</h1>
+			<a id="home" href="${pageContext.request.contextPath}/index.jsp"><h1 id="img" class="animate__animated">
+				<svg  xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+</svg>
+				Acorn Kiosk
+				</h1>
+			</a>
+		
 		<p>
 			사장님 로그인 페이지에 오신 것을 환영합니다.<br> 이곳에서는 가게 운영에 필요한 모든 관리 기능에 접근하실 수
 			있습니다.<br> <strong><a href="signup_form.jsp">회원가입 하러
@@ -80,6 +88,13 @@ if (cooks != null) {
 <!-- Scripts -->
 <script src="${pageContext.request.contextPath}/owner_assets/js/main.js"></script>
 <script>
+		document.querySelector("#home").addEventListener("click",(e)=>{
+			document.querySelector("#img").classList.add("animate__backOutLeft");
+			e.preventDefault();
+			setTimeout(function() { // setTimeout 함수를 사용해 1초 후에 페이지 이동
+	            window.location.href = "../index.jsp";
+	        }, 1000);
+		});
 		
 		let emailNN = false;
 		let pwdNN = false;
