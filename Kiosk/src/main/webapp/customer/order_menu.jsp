@@ -86,24 +86,36 @@ pageContext.setAttribute("randomCategory", randomCategory);
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/order_assets/css/noscript.css" />
 </noscript>
-<style>
-	td {
-		text-align: center;
-	}
-	.thumb{
-	  position: relative;
+ <style>
+ <c:if test="${isEmpty}">		
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    </c:if>
+    /* 기존 스타일 유지 */
+    td {
+      text-align: center;
+    }
+    .thumb {
+      position: relative;
       display: inline-block;
-	}
+    }
     .overlay {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       display: block;
-      width:100%;
-      height:100%;
+      width: 100%;
+      height: 100%;
     }
-</style>
+
+  </style>
 </head>
 <body class="is-preload">
 	<!-- Wrapper -->
@@ -124,22 +136,29 @@ pageContext.setAttribute("randomCategory", randomCategory);
 
 		<!-- Main -->
 		<div class="category">
-			<c:choose>
-				<c:when test="${isEmpty}">
-					<h1>메뉴 준비중</h1>
-				</c:when>
-				<c:otherwise>
-					<h1>${randomCategory}</h1>
-				</c:otherwise>
-			</c:choose>
+				<c:if test="${!isEmpty}">
+		 	 	<h1>${randomCategory}</h1>
+				</c:if>
 		</div>
 
 		<div id="main" style="display: flex; flex-wrap: wrap;">
 			<!-- 첫화면 접속시 작동할 코드 -->
 			<c:choose>
 				<c:when test="${empty menuList}">
-					<img src="${pageContext.request.contextPath}/images/empty.jpg"
-						alt="" />
+				<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Acorn Order</h1>
+								<hr/>
+								<h2>오픈 준비중입니다!!</h2>
+								<p>더 나은 서비스 제공해 드리기 위해 <br>최선을 다하겠습니다.</p>
+								<p>(오픈 시간은 <strong>변경</strong>될수 있으니 양해 부탁드립니다)</p>
+								<p>연락처:010-1234-1234</p>
+							<hr />
+							</div>
+						</div>
 				</c:when>
 				<c:otherwise>
 				
@@ -216,11 +235,12 @@ pageContext.setAttribute("randomCategory", randomCategory);
 				<div>
 					<section>
 						<h2>CHOOSE CATEGORY</h2>
+						
 						<ul class="action">
 							<c:forEach var="tmp" items="${requestScope.category}">
-								<li><h3><a
+								<li><h2><a
 									href="${pageContext.request.contextPath}/customer/order_menu.jsp?categoryName=${tmp.category}"
-									class="category-list">${tmp.category}</a></h3></li>
+									class="category-list">${tmp.category}</a></h2></li>
 							</c:forEach>
 						</ul>
 					</section>

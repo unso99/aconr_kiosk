@@ -1,3 +1,4 @@
+<%@page import="kiosk.order.dao.OrderDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kiosk.order.dto.OrderDto"%>
 <%@page import="java.util.List"%>
@@ -7,12 +8,24 @@
 <%
 boolean isSuccess = true;
 List<OrderDto> shopList = (List<OrderDto>)session.getAttribute("shopList");
-
+List<OrderDto> OrderList=new ArrayList<>();
 if(shopList.isEmpty()) isSuccess = false;
 int totalPrice = 0;
+boolean success=false;
+boolean pass=false;
 for(OrderDto item : shopList){
 	totalPrice += item.getCount() * item.getPrice();
+	OrderDto dto=new OrderDto();
+	dto.setStoNum(item.getStoNum());
+	dto.setMenu(item.getMenu());
+	dto.setCount(item.getCount());
+	dto.setPrice(item.getPrice());
+	dto.setTableNum(item.getTableNum());
+	
+	OrderList.add(dto);
+
 }
+
 pageContext.setAttribute("totalPrice", totalPrice);
 pageContext.setAttribute("isSuccess", isSuccess);
 
@@ -82,7 +95,7 @@ pageContext.setAttribute("isSuccess", isSuccess);
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="tmp" items="${sessionScope.shopList}">
+												<c:forEach var="tmp" items="${OrderList}">
 														<tr>
 															<td>${tmp.menu}</td>
 															<td>${tmp.count }</td>
