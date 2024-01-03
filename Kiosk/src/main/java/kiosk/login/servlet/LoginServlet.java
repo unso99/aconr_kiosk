@@ -26,26 +26,7 @@ public class LoginServlet extends HttpServlet{
 		 // 사용자가 제출한 폼 데이터에서 사용자 이름과 비밀번호 추출
         String email = req.getParameter("email");
         String pwd = req.getParameter("pwd");
-        Cookie[] cooks = req.getCookies();
-        System.out.println(cooks+"asdfsadf");
-        if(email == null) {
-        	boolean hasCook = false;
-        	if (cooks != null) {
-        		for (Cookie tmp : cooks) {
-        			String key = tmp.getName();
-        			if (key.equals("savedEmail")) {
-        		email = tmp.getValue();
-        		System.out.println("saved email : " + email);
-        			}
-        			if (key.equals("savedPwd")) {
-        		pwd = tmp.getValue();
-        		System.out.println("saved pwd : " + pwd);
-        		hasCook = true;
-        		System.out.println(hasCook);
-        			}
-        		}
-        	}
-        }
+       
         boolean isSuccess;
 //        OwnerDto dto=new OwnerDto();
 //		boolean isSuccess = OwnerDao.getInstance().insert(dto);
