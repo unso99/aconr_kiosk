@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet{
 		 // 사용자가 제출한 폼 데이터에서 사용자 이름과 비밀번호 추출
         String email = req.getParameter("email");
         String pwd = req.getParameter("pwd");
+       
         boolean isSuccess;
 //        OwnerDto dto=new OwnerDto();
 //		boolean isSuccess = OwnerDao.getInstance().insert(dto);
@@ -63,4 +64,7 @@ public class LoginServlet extends HttpServlet{
             }
         }
     }
+
 }
+
+

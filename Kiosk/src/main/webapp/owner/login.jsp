@@ -1,9 +1,12 @@
+<%@page import="kiosk.owner.dto.OwnerDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String email = request.getParameter("email");
 	String pwd = request.getParameter("pwd");
 	String isSave = request.getParameter("isSave");
+	boolean isSuccess = false; // Assuming login is not successful by default
+    OwnerDto dto = null; // Initialize dto to null
 	if(isSave != null){
 		//아이디 비밀번호를 쿠키로 응답하고 1주일 동안 유지되도록 한다.
 		Cookie cook1 = new Cookie("savedEmail", email);
@@ -23,7 +26,10 @@
 		response.addCookie(cook1);
 		response.addCookie(cook2);
 	}
-
+	
+    if (dto != null && dto.getEmail() != null && dto.getEmail().equals(email) && dto.getPwd().equals(pwd)) {
+	        isSuccess = true; // Set isSuccess to true upon successful login
+	    }
 	
 %>
 <!DOCTYPE html>
@@ -52,8 +58,8 @@
 				</c:when>
 				<c:otherwise>
 					<p>
-					일시적인 오류로 서비스 접속에 실패했습니다.<br/>
-					잠시 후 다시 시도해 주시기 바랍니다.<br/>
+					로그인에 실패했습니다.<br/>
+					이메일이 존재하지 않거나 이메일과 비밀번호가 일치하지 않습니다.<br/>
 					<a href="signup_form.jsp">다시 가입하러가기</a>
 					</p>
 				</c:otherwise>
