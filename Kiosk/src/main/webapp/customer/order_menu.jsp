@@ -428,7 +428,7 @@ pageContext.setAttribute("randomCategory", randomCategory);
     	
     	
     	minus.addEventListener("click", () => {
-            if (resultcount > 1) {
+            if (resultCount > 1) {
                 resultCount--;
                 count.innerText = resultCount;
                 resultTotal = calculation * resultCount;
