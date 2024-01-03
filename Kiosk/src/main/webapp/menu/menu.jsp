@@ -49,13 +49,30 @@
 		justify-content:center;
 	}
 	#imagefit{
-		display:flex;
-		justify-content:center;
+	  position: relative;
+      
+	  display:flex;
+	  justify-content:center;
+	
 	}
 	
 	.imageUrl{
 		border: solid 10px black;
 	}
+	
+	
+	
+	 
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width:100%;
+      height:100%;
+    }
 	
 </style>
 </head>
@@ -137,13 +154,18 @@
                            <c:if test="${tmp2.category eq tmp1.category and tmp2.stoNum eq tmp1.stoNum}">
                                  <div class="col-4">
                                     <article id="item" class="item">
-                                       <a href="product/prod_updateform?name=${tmp2.name}" id="imagefit" class="image fit">
+                                       <a href="product/prod_updateform?name=${tmp2.name}" id="imagefit" class="imagefit">
                                        <c:choose>   
                                             <c:when test="${tmp2.imageUrl eq  null }">
                                                <img src="${pageContext.request.contextPath}/images/prepare.jpg" alt="" />
                                             </c:when>
                                             <c:otherwise><img id="ImageUrl" class="ImageUrl" src="${pageContext.request.contextPath}/upload/${tmp2.imageUrl }" alt="상품 이미지"/></c:otherwise>
                                          </c:choose>
+                                         
+                                         <c:if test="${tmp2.sell eq 'YES'}">
+											<img src="${pageContext.request.contextPath}/images/sell2.png" alt="덮어쓸 이미지" class="overlay" id="overlayImage" >	
+										</c:if>
+										
                                        </a>
                                        
                                        <header>

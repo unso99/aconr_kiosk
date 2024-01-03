@@ -26,7 +26,9 @@ if (cooks != null) {
 	System.out.println(hasCook);
 		}
 	}
+
 }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -80,6 +82,7 @@ if (cooks != null) {
 <!-- Scripts -->
 <script src="${pageContext.request.contextPath}/owner_assets/js/main.js"></script>
 <script>
+		
 		
 		let emailNN = false;
 		let pwdNN = false;
