@@ -85,7 +85,7 @@
 
                <!-- Logo -->
                   <div id="logo">
-                     <span class="image avatar48"><img src="${pageContext.request.contextPath}/images/avatar.jpg" alt="" /></span>
+                     <span class="image avatar48"><img src="${pageContext.request.contextPath}/images/coffeeganpan.jpg" alt="" /></span>
                      <h1 id="title">${sessionScope.oName}</h1>
                      <p><%=email %></p>
                      <a href="${pageContext.request.contextPath}/owner/logout.jsp"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
