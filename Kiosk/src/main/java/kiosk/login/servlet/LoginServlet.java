@@ -34,6 +34,13 @@ public class LoginServlet extends HttpServlet{
         // 실제로는 데이터베이스에서 사용자 정보를 가져와서 확인하는 것이 일반적입니다.
         // 여기서는 간단한 예제를 위해 미리 정의된 값과 비교합니다.
         OwnerDto dto = OwnerDao.getInstance().getData(email);
+        if(dto == null) {
+        	isSuccess = false;
+        	req.setAttribute("errorMessage", "Invalid email or password. Please try again.");
+            RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+            rd.forward(req, resp);
+        }
+        
         if (dto.getEmail().equals(email) && dto.getPwd().equals(pwd)) {
             // 사용자 인증이 성공하면 세션을 생성하고 사용자를 로그인 상태로 유지
             HttpSession session = req.getSession();
@@ -42,14 +49,18 @@ public class LoginServlet extends HttpServlet{
             session.setAttribute("oName", dto.getO_name());
             isSuccess = true;
          
-        } else {
-            // 인증이 실패하면 로그인 페이지로 다시 이동
-        	isSuccess = false;
-        	
+            req.setAttribute("isSuccess", isSuccess);
+
+            if (isSuccess) {
+                // 로그인 성공 시 메인 페이지로 이동
+            	RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+                rd.forward(req, resp);
+            } else {
+                // 로그인 실패 시 에러 메시지를 표시하고 로그인 페이지로 이동
+                req.setAttribute("errorMessage", "Invalid email or password. Please try again.");
+                RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+                rd.forward(req, resp);
+            }
         }
-        
-        req.setAttribute("isSuccess", isSuccess);
-        RequestDispatcher rd=req.getRequestDispatcher("login.jsp");
-        rd.forward(req, resp);
-	}
+    }
 }
