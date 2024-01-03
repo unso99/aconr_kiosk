@@ -218,9 +218,9 @@ pageContext.setAttribute("randomCategory", randomCategory);
 						<h2>CHOOSE CATEGORY</h2>
 						<ul class="action">
 							<c:forEach var="tmp" items="${requestScope.category}">
-								<li><a
+								<li><h3><a
 									href="${pageContext.request.contextPath}/customer/order_menu.jsp?categoryName=${tmp.category}"
-									class="category-list">${tmp.category}</a></li>
+									class="category-list">${tmp.category}</a></h3></li>
 							</c:forEach>
 						</ul>
 					</section>

@@ -48,7 +48,7 @@ pageContext.setAttribute("isSuccess", isSuccess);
 									<c:when test="${isSuccess}">
 										<a href="#orderMenu"><h1>주문 내역서</h1></a>
 										<p>주문이 성공했습니다. 소중한 주문에 감사드립니다!</p>
-										<a href="${pageContext.request.contextPath}/customer/order_menu.jsp">추가 주문하러가기</a>	
+										<a href="${pageContext.request.contextPath}/customer/order">추가 주문하러가기</a>	
 									</c:when>
 									<c:otherwise>
 										<p>주문 과정에서 문제가 발생하여 실패되었습니다. 이용에 어려움을 드려 죄송합니다.</p>
