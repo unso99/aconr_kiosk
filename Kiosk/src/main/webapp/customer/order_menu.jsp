@@ -9,25 +9,16 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-// 여기는 사장님이 장사 오픈 전에 로그인 여부를 확인하여 DB에서 어떤 사장님의 메뉴를 가져올 지 판단하는 구간
-// 만약 로그인이 안된 상태로 접근할 경우 예외처리 페이지를 보여줘야 한다.
 String stoNum = (String) session.getAttribute("stoNum");
 String categoryName = request.getParameter("categoryName");
 
-// (작업중)
-
-//=====================================================================================
-// 여기는 사장님이 로그인 후 장사를 시작했다고 가정하여 고객님들이 키오스크를 눌렀을 때 메뉴를 가져오기 위한 첫번째 작업
 
 MenuDao menuDao = MenuDao.getInstance();
 List<CategoryDto> categoryList = MenuDao.getInstance().getCategory(stoNum);
 
-//카테고리가 없을 시 -> empty view 생성
 boolean isEmpty = categoryList.isEmpty();
 pageContext.setAttribute("isEmpty", isEmpty);
 
-// =====================================================================================	
-// 두번째 작업으로 고객이 처음 마주할 때 첫화면을 랜덤으로 카테고리 하나 선택 후 'category' 변수에 담아서 메뉴 리스트를 뽑는다.
 String randomCategory = "";
 Random random = new Random();
 List<String> row = new ArrayList<>();
@@ -70,7 +61,6 @@ if (!isEmpty && categoryName == null) {
 
 pageContext.setAttribute("randomCategory", randomCategory);
 
-//=====================================================================================	
 %>
 
 <!DOCTYPE html>
@@ -83,9 +73,10 @@ pageContext.setAttribute("randomCategory", randomCategory);
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/order_assets/css/main.css" />
 <noscript>
-	<link rel="stylesheet"
+<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/order_assets/css/noscript.css" />
 </noscript>
+
 <style>
 	td {
 		text-align: center;
@@ -329,7 +320,7 @@ pageContext.setAttribute("randomCategory", randomCategory);
 		src="${pageContext.request.contextPath}/order_assets/js/util.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/order_assets/js/main.js"></script>
-
+	
 	<!-- Scripts 장바구니 (session 정보)관리 -->
 	<script>
 
